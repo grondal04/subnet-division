@@ -1,13 +1,13 @@
 function getMask(IPs) {
     let m = {};
     let x = 0;
-    let bitSum = 0;
 
-    while (bitSum < IPs) {
-        bitSum += (1 << x); // 1 << x is equivalent to pow(2, x)
-
-        if (bitSum < IPs) x++;
-    }
+    for (let i = 0; i <= 7; i++)
+        if ((1 << i) >= IPs) {
+            x = i;
+            break;
+        }
+    console.log(x)
 
     let bin_mask = '';
     for (let i = 1; i <= 8 - x; i++) {
