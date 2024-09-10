@@ -1,16 +1,3 @@
-function binaryToDecimal(n) {
-    let dec_value = 0;
-    let base = 1;
-
-    while (n > 0) {
-        dec_value += (n % 10) * base;
-        n = Math.floor(n / 10);
-        base <<= 1; // Equivalent to base *= 2
-    }
-
-    return dec_value;
-}
-
 function getMask(IPs) {
     let m = {};
     let x = 0;
@@ -20,15 +7,17 @@ function getMask(IPs) {
         bitSum += (1 << x++); // 1 << x is equivalent to pow(2, x)
     }
 
-    let bin_mask = 0;
+    let bin_mask = '';
     for (let i = 1; i <= 8 - x; i++) {
-        bin_mask = (bin_mask << 1) | 1; // Left shift and set the LSB to 1
+        bin_mask += '1';
     }
-    bin_mask <<= x; // Shift left to place zeros
+    for (let i = 1; i <= x; i++) {
+        bin_mask += '0';
+    }
 
     m.x = x;
     m.bit = 24 + (8 - x);
-    m.mask = binaryToDecimal(bin_mask);
+    m.mask = parseInt(bin_mask, 2);
 
     return m;
 }
