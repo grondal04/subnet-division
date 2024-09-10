@@ -4,7 +4,9 @@ function getMask(IPs) {
     let bitSum = 0;
 
     while (bitSum < IPs) {
-        bitSum += (1 << x++); // 1 << x is equivalent to pow(2, x)
+        bitSum += (1 << x); // 1 << x is equivalent to pow(2, x)
+
+        if (bitSum < IPs) x++;
     }
 
     let bin_mask = '';
